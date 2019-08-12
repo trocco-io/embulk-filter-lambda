@@ -26,17 +26,16 @@ filters:
   - type: lambda
     aws_access_key_id: Abcdefghijk
     aws_secret_access_key: Abcdefghijk
-    region: ap-northeast-1
+    aws_region: ap-northeast-1
     func_name: lambdaFunc
     mode: append
     parser:
       type: json
       root: $.response
       schema:
-        schema:
-          - {name: name, type: string}
-          - {name: next, type: string}
-          - {name: prev, type: string}
+        - {name: name, type: string}
+        - {name: next, type: string}
+        - {name: prev, type: string}
 ```
 
 
