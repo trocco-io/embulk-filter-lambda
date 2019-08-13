@@ -1,7 +1,7 @@
 # Lambda filter plugin for Embulk
 
 ## Overview
-filter though AWS lambda function. Each record is passed to the lambda function.
+filter though AWS lambda function. Each record is passed to the lambda function. Lambda function is expected to return JSON. These returned data is structured jsonpath and schema information.
 
 Use case is filtering data by:
 - API's that do not have a embulk plugin
@@ -17,7 +17,8 @@ Use case is filtering data by:
 - **region**: AWS region (string, required)
 - **func_name**: the name of lamba function (string, required)
 - **mode**: append/replace (string, default: `"append"`)
-- **parser**: parsing result of lambda function (required)
+- **root**: JSONpath root (string, default: `"$."`)
+- **schema**: JSONpath root (array, required)
 
 ## Example
 
@@ -29,13 +30,11 @@ filters:
     aws_region: ap-northeast-1
     func_name: lambdaFunc
     mode: append
-    parser:
-      type: json
-      root: $.response
-      schema:
-        - {name: name, type: string}
-        - {name: next, type: string}
-        - {name: prev, type: string}
+    root: $.response
+    schema:
+      - {name: name, type: string}
+      - {name: next, type: string}
+      - {name: prev, type: string}
 ```
 
 
